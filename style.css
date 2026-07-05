@@ -1,0 +1,365 @@
+/*
+Theme Name: Fanclub Jadzi
+Theme URI: https://github.com/wrx75841/oceanwp-child
+Description: Fanklub beagli o imieniu Jadzia - child theme OceanWP.
+Author: wrx75841
+Template: oceanwp
+Version: 1.0.0
+*/
+
+/* Styl motywu nadrzednego (OceanWP) ladowany jest z functions.php,
+   nie przez @import - patrz fanclub_jadzi_enqueue_styles(). */
+
+:root {
+    --bg: #fbf3e7;
+    --bg-elevated: #ffffff;
+    --text: #3b2418;
+    --text-muted: #8a6f5c;
+    --accent: #c9822e;
+    --accent-2: #e85d75;
+    --border: #ecdcc4;
+    --radius: 16px;
+    --max-width: 1080px;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: #2a1d14;
+        --bg-elevated: #3a2a1c;
+        --text: #f5e9da;
+        --text-muted: #c9b39c;
+        --border: #4a3626;
+    }
+}
+
+.wrap { max-width: var(--max-width); margin: 0 auto; padding: 0 24px; }
+
+/* --- Sniffing beagle strip (top of page) --- */
+.sniff-strip {
+    position: relative;
+    height: 64px;
+    overflow: hidden;
+    background: var(--bg-elevated);
+    border-bottom: 1px solid var(--border);
+}
+
+.sniff-strip svg {
+    position: absolute;
+    top: 6px;
+    left: -120px;
+    width: 110px;
+    height: auto;
+    animation: sniff-walk 14s linear infinite;
+}
+
+@keyframes sniff-walk {
+    from { left: -120px; }
+    to { left: 100%; }
+}
+
+.beagle-head {
+    transform-box: fill-box;
+    transform-origin: 80% 55%;
+    animation: sniff-bob 1.3s ease-in-out infinite;
+}
+
+@keyframes sniff-bob {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    30% { transform: translateY(3px) rotate(-7deg); }
+    65% { transform: translateY(-1px) rotate(3deg); }
+}
+
+.beagle-tail {
+    transform-box: fill-box;
+    transform-origin: 0% 50%;
+    animation: tail-wag 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes tail-wag {
+    from { transform: rotate(-8deg); }
+    to { transform: rotate(12deg); }
+}
+
+.sniff-line {
+    opacity: 0;
+    transform-box: fill-box;
+    animation: sniff-fade 1.3s ease-in-out infinite;
+}
+
+.sniff-line:nth-of-type(1) { animation-delay: 0s; }
+.sniff-line:nth-of-type(2) { animation-delay: 0.2s; }
+.sniff-line:nth-of-type(3) { animation-delay: 0.4s; }
+
+@keyframes sniff-fade {
+    0% { opacity: 0; transform: translate(0, 0); }
+    40% { opacity: 1; }
+    100% { opacity: 0; transform: translate(6px, -8px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .sniff-strip svg,
+    .beagle-head,
+    .beagle-tail,
+    .sniff-line {
+        animation: none !important;
+    }
+}
+
+/* --- Hero --- */
+.hero-grid {
+    padding: 56px 0 80px;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    align-items: center;
+    gap: 40px;
+}
+
+@media (max-width: 900px) {
+    .hero-grid { grid-template-columns: 1fr; text-align: center; padding: 40px 0 56px; }
+    .hero .hero-art { order: -1; }
+}
+
+.hero .badge {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--bg-elevated);
+    color: var(--accent-2);
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.hero h1 {
+    font-size: clamp(2.1rem, 4.5vw, 3.3rem);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin: 0 0 18px;
+}
+
+.hero h1 em { font-style: normal; color: var(--accent-2); }
+
+.hero p {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    max-width: 480px;
+    margin: 0 0 32px;
+}
+
+@media (max-width: 900px) { .hero p { margin: 0 auto 32px; } }
+
+.hero .cta-row { display: flex; gap: 14px; flex-wrap: wrap; }
+@media (max-width: 900px) { .hero .cta-row { justify-content: center; } }
+
+.btn {
+    display: inline-block;
+    padding: 13px 26px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    border: 1px solid transparent;
+}
+
+.btn-primary { background: var(--accent-2); color: #fff; }
+.btn-primary:hover { text-decoration: none; opacity: 0.9; }
+
+.btn-secondary { background: transparent; border-color: var(--border); color: var(--text); }
+.btn-secondary:hover { text-decoration: none; border-color: var(--accent); }
+
+.hero-art { display: flex; justify-content: center; }
+.hero-art svg { width: 100%; max-width: 320px; height: auto; }
+
+/* --- Fact of the day --- */
+.fact-of-the-day {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 32px;
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto 88px;
+}
+
+.fact-of-the-day-label {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--accent-2);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 12px;
+}
+
+.fact-of-the-day p {
+    margin: 0 0 18px;
+    font-size: 1.05rem;
+    color: var(--text);
+}
+
+/* --- Section heading --- */
+.section-heading { text-align: center; margin: 0 0 40px; }
+.section-heading h2 { font-size: 1.9rem; margin: 0 0 8px; }
+.section-heading p { color: var(--text-muted); margin: 0; }
+
+/* --- Facts about Jadzia --- */
+.facts {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding: 20px 0 88px;
+}
+
+@media (max-width: 900px) { .facts { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 520px) { .facts { grid-template-columns: 1fr; } }
+
+.fact-card {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 26px 20px;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.5s ease, transform 0.5s ease, border-color 0.2s ease;
+}
+
+.fact-card.is-visible { opacity: 1; transform: translateY(0); }
+.fact-card:hover { border-color: var(--accent); }
+.fact-card svg { margin: 0 auto 14px; display: block; }
+.fact-card h3 { margin: 0 0 4px; font-size: 1rem; color: var(--text); }
+.fact-card p { margin: 0; color: var(--text-muted); font-size: 0.85rem; }
+
+/* --- Gallery (osobna strona - page-galeria.php) --- */
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+    margin: 20px 0 12px;
+}
+
+.gallery img {
+    width: 240px;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+@media (max-width: 560px) {
+    .gallery img { width: 100%; max-width: 320px; }
+}
+
+.gallery img:hover { transform: scale(1.03); }
+
+.photo-credit {
+    text-align: center;
+    margin: 0 0 64px;
+    color: var(--text-muted);
+    font-size: 0.78rem;
+}
+
+/* --- Why we love her --- */
+.love {
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 56px 0;
+}
+
+.love-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+@media (max-width: 780px) { .love-grid { grid-template-columns: 1fr; } }
+
+.love-item { display: flex; gap: 16px; align-items: flex-start; }
+.love-item svg { flex-shrink: 0; }
+.love-item h4 { margin: 0 0 6px; font-size: 1rem; }
+.love-item p { margin: 0; color: var(--text-muted); font-size: 0.9rem; }
+
+/* --- Join CTA --- */
+.join {
+    text-align: center;
+    padding: 72px 0;
+}
+
+.join h2 { font-size: 2rem; margin: 0 0 12px; }
+.join p { color: var(--text-muted); margin: 0 0 28px; }
+
+/* --- Status strip --- */
+.status-strip { padding: 18px 0; text-align: center; color: var(--text-muted); font-size: 0.85rem; }
+.status-strip strong { color: var(--accent-2); }
+
+/* --- WooCommerce products shortcode (strona Sklep) ---
+   Wymuszamy nasz uklad (!important) - domyslne style WooCommerce
+   (float/procentowe szerokosci, wlasny grid z --columns) potrafia
+   kolidowac z nasza siatka i psuc rozmiar kart/zdjec/przycisku. */
+.woocommerce ul.products {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 20px !important;
+    list-style: none;
+    padding: 0;
+    margin: 20px 0 72px;
+    width: 100%;
+}
+
+@media (max-width: 900px) {
+    .woocommerce ul.products { grid-template-columns: repeat(2, 1fr) !important; }
+}
+@media (max-width: 560px) {
+    .woocommerce ul.products { grid-template-columns: 1fr !important; }
+}
+
+.woocommerce ul.products li.product {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    text-align: center;
+    width: 100% !important;
+    max-width: none !important;
+    float: none !important;
+    margin: 0 !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.woocommerce ul.products li.product img {
+    display: block;
+    width: 100% !important;
+    height: auto !important;
+    max-width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: calc(var(--radius) - 4px);
+    margin: 0 0 14px !important;
+}
+
+.woocommerce ul.products li.product .woocommerce-loop-product__title {
+    color: var(--text);
+    font-size: 1rem;
+    margin: 0 0 6px;
+}
+
+.woocommerce ul.products li.product .price {
+    color: var(--accent-2);
+    font-weight: 700;
+}
+
+.woocommerce ul.products li.product .button {
+    display: inline-block;
+    width: auto;
+    white-space: nowrap;
+    margin-top: 12px;
+    padding: 10px 22px;
+    border-radius: 999px;
+    background: var(--accent-2);
+    color: #fff !important;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.85rem;
+    line-height: 1.2;
+    border: none;
+}
