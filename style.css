@@ -363,3 +363,16 @@ Version: 1.0.0
     line-height: 1.2;
     border: none;
 }
+
+/* --- Naglowek OceanWP: ukryty tytul tekstowy, wysrodkowane menu ---
+   Selektory (#site-logo, #site-navigation-wrap) potwierdzone w zrodle
+   OceanWP (partials/header/logo.php, partials/header/nav.php). */
+#site-logo {
+    display: none !important;
+}
+
+#site-navigation-wrap {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    float: none !important;
+}
