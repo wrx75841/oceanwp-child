@@ -365,16 +365,30 @@ Version: 1.0.0
 }
 
 /* --- Naglowek OceanWP: ukryty tytul tekstowy, wysrodkowane menu ---
-   Selektory (#site-logo, #site-navigation-wrap) potwierdzone w zrodle
-   OceanWP (partials/header/logo.php, partials/header/nav.php). */
+   Selektory potwierdzone w zrodle OceanWP:
+   - #site-logo: partials/header/logo.php
+   - #site-navigation-wrap: partials/header/nav.php
+   - #site-header-inner: inc/customizer/css-output/header.php (wrapper
+     obejmujacy logo i nawigacje w jednym wierszu)
+   Poprzednia proba (margin: auto na #site-navigation-wrap) nie
+   zadzialala - cel byl za nisko w hierarchii. Wymuszamy flex na
+   faktycznym kontenerze wiersza (#site-header-inner) zamiast liczyc na
+   to, ze juz jest flex z odpowiednim justify-content. */
 #site-logo {
     display: none !important;
 }
 
+#site-header-inner {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
 #site-navigation-wrap {
-    margin-left: auto !important;
-    margin-right: auto !important;
+    margin: 0 !important;
     float: none !important;
+    position: static !important;
 }
 
 /* --- Wymuszenie pelnej szerokosci tresci (bez zarezerwowanego sidebara) ---
