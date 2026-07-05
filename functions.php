@@ -58,6 +58,14 @@ function fanclub_jadzi_theme_setup_once() {
     // inc/customizer/options/page-settings.php ('ocean_page_title_display').
     set_theme_mod( 'ocean_page_title_display', false );
 
+    // 1b) Domyslny uklad zwyklych stron w OceanWP to "right-sidebar" -
+    // rezerwuje puste miejsce po prawej, nawet bez zadnych widzetow w
+    // sidebarze. Nasze strony nigdy nie uzywaja sidebara, wiec ustawiamy
+    // globalny domyslny uklad na pelna szerokosc. Klucz potwierdzony w
+    // zrodle OceanWP: inc/helpers.php -> oceanwp_post_layout()
+    // ( get_theme_mod( 'ocean_page_single_layout', 'right-sidebar' ) ).
+    set_theme_mod( 'ocean_page_single_layout', 'full-width' );
+
     // 2) Utworz menu z 4 pozycjami i przypisz je do lokalizacji "main_menu"
     // (klucz potwierdzony w zrodle OceanWP: functions.php -> register_nav_menus()).
     $menu_name = 'Menu glowne Fanclubu';

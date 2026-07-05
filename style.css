@@ -376,3 +376,20 @@ Version: 1.0.0
     margin-right: auto !important;
     float: none !important;
 }
+
+/* --- Wymuszenie pelnej szerokosci tresci (bez zarezerwowanego sidebara) ---
+   Ustawiamy to tez programowo (ocean_page_single_layout w functions.php),
+   ale to zabezpieczenie na wypadek strony, ktora ma wlasny, rezczny
+   override ukladu (metadane posta maja pierwszenstwo przed globalnym
+   ustawieniem). Klasy potwierdzone w zrodle OceanWP: oceanwp_body_classes(). */
+.content-right-sidebar #primary,
+.content-left-sidebar #primary,
+.content-both-sidebars #primary {
+    width: 100% !important;
+}
+
+.content-right-sidebar #secondary,
+.content-left-sidebar #secondary,
+.content-both-sidebars #secondary {
+    display: none !important;
+}
