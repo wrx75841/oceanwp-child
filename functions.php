@@ -4,10 +4,23 @@
  */
 
 function fanclub_jadzi_enqueue_styles() {
-    $parent = wp_get_theme( 'OceanWP' );
+    // NIE rejestrujemy tutaj sami stylu 'oceanwp-style' - robi to sam
+    // rodzic (OceanWP) we wlasnym functions.php. Dziecko laduje sie
+    // PRZED rodzicem, wiec gdybysmy sami zarejestrowali ten uchwyt
+    // (nawet niekompletnie, np. wskazujac tylko na root style.css),
+    // "zajelibysmy" te nazwe pierwsi i prawdziwa, pelna rejestracja
+    // OceanWP zostalaby po cichu zignorowana (WordPress nie nadpisuje
+    // juz zarejestrowanego uchwytu) - co realnie sie zdarzylo. Sami
+    // deklarujemy tylko zaleznosc od 'oceanwp-style' - to bezpieczny,
+    // oficjalny wzorzec z github.com/oceanwp/oceanwp-child-theme.
+    $parent_theme = wp_get_theme( 'OceanWP' );
 
-    wp_enqueue_style( 'oceanwp-style', get_template_directory_uri() . '/style.css', array(), $parent->get( 'Version' ) );
-    wp_enqueue_style( 'fanclub-jadzi-child-style', get_stylesheet_directory_uri() . '/style.css', array( 'oceanwp-style' ), wp_get_theme()->get( 'Version' ) );
+    wp_enqueue_style(
+        'fanclub-jadzi-child-style',
+        get_stylesheet_directory_uri() . '/style.css',
+        array( 'oceanwp-style' ),
+        $parent_theme->get( 'Version' )
+    );
 }
 add_action( 'wp_enqueue_scripts', 'fanclub_jadzi_enqueue_styles' );
 
